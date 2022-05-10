@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Xunit;
 
@@ -14,13 +15,15 @@ namespace Calculations.Tests
             // Clean up resource code can add here
         }
     }
-    public class CalculationsTest : IClassFixture<CalculationsFixture>
+    public class CalculationsTest : IClassFixture<CalculationsFixture>, IDisposable
     {
         private readonly CalculationsFixture _calculationsFixture;
+        private readonly MemoryStream _memoryStream;
 
         public CalculationsTest(CalculationsFixture calculationsFixture)
         {
             this._calculationsFixture = calculationsFixture;
+            _memoryStream = new MemoryStream();
         }
 
         [Fact]
@@ -56,6 +59,10 @@ namespace Calculations.Tests
             Assert.Equal(expectedCollection, calc.FiboNumbers);
         }
 
-
+        public void Dispose()
+        {
+            // Clean up resource code can add here
+            _memoryStream.Close();
+        }
     }
 }
