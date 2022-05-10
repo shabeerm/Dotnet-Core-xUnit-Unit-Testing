@@ -29,5 +29,13 @@ namespace Calculations.Tests
             var exceptionDetails = Assert.Throws<ArgumentException>(() => customer.GetOrdersByName(null));
             Assert.Equal("Please Provide Name", exceptionDetails.Message);
         }
+
+        [Fact]
+        public void LoyalCustomerForOrderG100()
+        {
+            var customer = CustomerFactory.CreateCustomerInstance(102);
+            var loyalCustomer = Assert.IsType<LoyalCustomer>(customer);
+            Assert.Equal(10, loyalCustomer.Discount);
+        }
     }
 }
