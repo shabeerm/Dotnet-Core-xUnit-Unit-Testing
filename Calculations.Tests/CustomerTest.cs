@@ -5,12 +5,20 @@ using Xunit;
 
 namespace Calculations.Tests
 {
+    [Collection("Customer")]
     public class CustomerTest
     {
+        private readonly CustomerFixture _customerFixture;
+
+        public CustomerTest(CustomerFixture customerFixture)
+        {
+            _customerFixture = customerFixture;
+        }
+
         [Fact]
         public void CheckNameNotEmpty()
         {
-            var customer = new Customer();
+            var customer = _customerFixture.cust;
             Assert.NotNull(customer.Name);
             Assert.False(string.IsNullOrEmpty(customer.Name));
         }
@@ -18,14 +26,14 @@ namespace Calculations.Tests
         [Fact]
         public void CheckLegiForDiscount()
         {
-            var customer = new Customer();
+            var customer = _customerFixture.cust;
             Assert.InRange(customer.Age, 25, 40);
         }
 
         [Fact]
         public void GetOrdersByNameNotNull()
         {
-            var customer = new Customer();
+            var customer = _customerFixture.cust;
             var exceptionDetails = Assert.Throws<ArgumentException>(() => customer.GetOrdersByName(null));
             Assert.Equal("Please Provide Name", exceptionDetails.Message);
         }
