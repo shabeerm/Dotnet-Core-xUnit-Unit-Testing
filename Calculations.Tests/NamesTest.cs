@@ -11,11 +11,12 @@ namespace Calculations.Tests
         public void MakeFullNameTest()
         {
             var names = new Names();
-            var result = names.MakeFullName("shabeer", "Moothedath");
+            var result = names.MakeFullName("Shabeer", "Moothedath");
             Assert.Equal("Shabeer Moothedath", result, ignoreCase: true);
             Assert.Contains("Shabeer", result, StringComparison.InvariantCultureIgnoreCase);
             Assert.StartsWith("Shabeer", result, StringComparison.InvariantCultureIgnoreCase);
             Assert.EndsWith("Moothedath", result, StringComparison.InvariantCultureIgnoreCase);
+            Assert.Matches("[A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+", result);
         }
     }
 }
