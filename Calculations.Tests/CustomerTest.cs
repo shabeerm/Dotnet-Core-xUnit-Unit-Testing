@@ -21,5 +21,13 @@ namespace Calculations.Tests
             var customer = new Customer();
             Assert.InRange(customer.Age, 25, 40);
         }
+
+        [Fact]
+        public void GetOrdersByNameNotNull()
+        {
+            var customer = new Customer();
+            var exceptionDetails = Assert.Throws<ArgumentException>(() => customer.GetOrdersByName(null));
+            Assert.Equal("Please Provide Name", exceptionDetails.Message);
+        }
     }
 }
